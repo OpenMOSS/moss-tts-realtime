@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="MOSS-TTS-Realtime: context-aware, full-stream speech synthesis for real-time voice agents. Explore the model, code, and interactive demo.">
+  <title>MOSS-TTS-REALTIME: LOW-LATENCY AND CONTEXT-AWARE FULL-STREAM SPEECH SYNTHESIS</title>
+  <style>
+    :root { color-scheme: light; --ink: #252c32; --muted: #637079; --accent: #24685c; --line: #e2e7e5; }
+    * { box-sizing: border-box; }
+    body { margin: 0; background: #fff; color: var(--ink); font-family: "Helvetica Neue", Helvetica, sans-serif; font-size: 16px; line-height: 1.75; -webkit-font-smoothing: antialiased; }
+    a { color: var(--accent); text-underline-offset: 4px; }
+    a:hover { color: #123f36; }
+    a:focus-visible { outline: 3px solid #488bcb; outline-offset: 5px; }
+    .skip { position: absolute; top: -100px; left: 20px; background: #fff; padding: 8px 16px; z-index: 2; }
+    .skip:focus { top: 12px; }
+    .page { max-width: 1040px; margin: 0 auto; padding: 0 32px; }
+    header { text-align: center; padding: 68px 12px 44px; border-bottom: 1px solid var(--line); }
+    .eyebrow { margin: 0 0 12px; font-size: 12px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: var(--accent); }
+    h1 { margin: 0; font-size: clamp(32px, 5.2vw, 52px); letter-spacing: -.04em; line-height: 1.15; font-weight: 700; }
+    .subtitle { max-width: 690px; margin: 16px auto 27px; font-size: clamp(19px, 2.6vw, 25px); line-height: 1.45; font-weight: 400; color: #53616a; }
+    .authors { max-width: 840px; margin: 0 auto; font-size: 15px; line-height: 2; }
+    .authors span { display: inline-block; margin: 0 7px; }
+    sup { font-size: .68em; line-height: 0; margin-left: 1px; }
+    .affiliations { margin: 14px 0 0; color: var(--muted); font-size: 14px; }
+    .affiliations span { display: inline-block; margin: 0 10px; }
+    .notes { margin: 5px 0 0; font-size: 12px; color: var(--muted); }
+    .links { display: flex; justify-content: center; flex-wrap: wrap; gap: 10px; margin-top: 27px; }
+    .button { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 43px; padding: 7px 17px; border: 1px solid #d6ddda; border-radius: 7px; color: var(--ink); background: #fff; text-decoration: none; font-size: 14px; font-weight: 500; transition: background .15s, border-color .15s; }
+    .button:hover { background: #f1f6f3; border-color: #9bb8ad; color: var(--accent); }
+    .button.primary { background: var(--accent); border-color: var(--accent); color: #fff; }
+    .button.primary:hover { background: #194e43; }
+    .icon { width: 17px; height: 17px; flex-shrink: 0; }
+    .hug { font-size: 19px; line-height: 1; }
+    main { padding-top: 37px; }
+    .prose { max-width: 800px; margin: 0 auto; }
+    section, section.prose { margin-bottom: 35px; }
+    h2 { font-size: 24px; line-height: 1.35; letter-spacing: -.025em; margin: 0 0 17px; font-weight: 600; }
+    p { margin: 0 0 16px; }
+    .features { padding-left: 22px; margin: 18px 0 0; }
+    .features li { padding-left: 4px; margin: 10px 0; }
+    .features li::marker { color: var(--accent); }
+    figure { margin: 23px 0 0; }
+    figure a { display: block; border: 1px solid var(--line); border-radius: 8px; padding: 20px 12px; }
+    figure img { display: block; width: 100%; height: auto; }
+    figcaption { max-width: 780px; margin: 14px auto 0; font-size: 13px; line-height: 1.65; color: var(--muted); text-align: center; }
+    .try { border-top: 1px solid var(--line); padding-top: 29px; margin-top: 34px; }
+    footer { border-top: 1px solid var(--line); padding: 20px 0 28px; text-align: center; font-size: 12px; color: var(--muted); }
+    @media (max-width: 600px) {
+      .page { padding: 0 20px; }
+      header { padding: 39px 0 30px; }
+      .authors { font-size: 13px; }
+      .authors span { margin: 0 4px; }
+      .affiliations { font-size: 12px; }
+      .affiliations span { margin: 0 5px; }
+      .button { padding: 7px 12px; font-size: 13px; }
+      main { padding-top: 28px; }
+      h2 { font-size: 22px; }
+      figure a { padding: 12px 3px; }
+      .features { padding-left: 18px; }
+    }
+    @media (prefers-reduced-motion: reduce) { .button { transition: none; } }
+  </style>
+</head>
+<body>
+  <a class="skip" href="#overview">Skip to content</a>
+  <div class="page">
+    <header>
+      <p class="eyebrow">Full-stream text-to-speech</p>
+      <h1>MOSS-TTS-REALTIME:</h1>
+      <p class="subtitle">LOW-LATENCY AND CONTEXT-AWARE<br>FULL-STREAM SPEECH SYNTHESIS</p>
+      <p class="authors">
+        <span>Yiwei Zhao<sup>1,2,3,*</sup></span>
+        <span>Yaozhou Jiang<sup>1,3,*</sup></span>
+        <span>Botian Jiang<sup>1,2,3</sup></span>
+        <span>Kexin Huang<sup>1</sup></span>
+        <span>Yiyang Zhang<sup>1,2,3</sup></span>
+        <span>Zhe Xu<sup>1,2,3</sup></span>
+        <span>Yuqian Zhang<sup>1,2,3</sup></span>
+        <span>Xiaogui Yang<sup>3</sup></span>
+        <span>Qingyuan Cheng<sup>3</sup></span>
+        <span>Xipeng Qiu<sup>1,2,3,†</sup></span>
+      </p>
+      <p class="affiliations"><span><sup>1</sup> Fudan University</span><span><sup>2</sup> Shanghai Innovation Institute</span><span><sup>3</sup> MOSI.AI</span></p>
+      <nav class="links" aria-label="Project resources">
+        <a class="button" href="https://github.com/OpenMOSS/MOSS-TTS/tree/main/moss_tts_realtime">
+          <svg class="icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .8a11.2 11.2 0 0 0-3.54 21.83c.56.1.77-.24.77-.54v-2.08c-3.13.68-3.79-1.33-3.79-1.33-.51-1.3-1.25-1.64-1.25-1.64-1.02-.7.08-.69.08-.69 1.13.08 1.73 1.16 1.73 1.16 1 1.72 2.63 1.22 3.27.93.1-.73.4-1.22.71-1.5-2.5-.28-5.13-1.25-5.13-5.55 0-1.23.44-2.23 1.16-3.02-.12-.29-.5-1.43.11-2.97 0 0 .95-.3 3.08 1.15a10.7 10.7 0 0 1 5.6 0c2.14-1.45 3.08-1.15 3.08-1.15.61 1.54.23 2.68.11 2.97.73.79 1.16 1.79 1.16 3.02 0 4.31-2.63 5.26-5.14 5.54.4.35.76 1.03.76 2.08v3.08c0 .3.2.65.78.54A11.2 11.2 0 0 0 12 .8Z"/></svg>
+          Code
+        </a>
+        <a class="button" href="https://huggingface.co/OpenMOSS-Team/MOSS-TTS-Realtime"><span class="hug" aria-hidden="true">🤗</span> Hugging Face Model</a>
+        <a class="button primary" href="https://www.mosi.cn/models/moss-tts-streaming"><svg class="icon" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m8 5 11 7-11 7V5Z" fill="currentColor"/></svg> Demo</a>
+      </nav>
+    </header>
+    <main>
+      <section class="prose" id="overview" aria-labelledby="overview-title">
+        <h2 id="overview-title">Overview</h2>
+        <p>We present <strong>MOSS-TTS-Realtime</strong>, a context-aware, full-stream text-to-speech model.</p>
+        <ul class="features">
+          <li><strong>Full-stream</strong>: Consumes incrementally arriving text from an LLM and synthesizes speech on the fly, without waiting for the complete response.</li>
+          <li><strong>Context-aware</strong>: Conditions on both textual and acoustic context from preceding dialogue turns to generate speech that stays consistent with the ongoing conversation.</li>
+          <li><strong>Low latency</strong>: Achieves a median time-to-first-audio of <strong>56.4 ms</strong> for TTS alone and <strong>202.8 ms</strong> end-to-end with an online LLM, on an H100 GPU.</li>
+          <li><strong>High quality</strong>: Delivers competitive zero-shot voice cloning and the best subjective naturalness among compared models.</li>
+        </ul>
+      </section>
+      <section aria-labelledby="architecture-title">
+        <div class="prose">
+          <h2 id="architecture-title">Architecture</h2>
+        </div>
+        <figure>
+          <a href="./assets/moss_tts_realtime.png" aria-label="Open the full-resolution model architecture diagram">
+            <img src="./assets/moss_tts_realtime.png" width="4003" height="1632" alt="MOSS-TTS-Realtime architecture showing dialogue text and speech context, streaming response text, the backbone and depth Transformers, and incremental speech output." decoding="async">
+          </a>
+        </figure>
+      </section>
+    </main>
+    <footer>MOSS-TTS-Realtime &nbsp; · &nbsp; Fudan University · Shanghai Innovation Institute · MOSI.AI</footer>
+  </div>
+</body>
+</html>
